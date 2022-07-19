@@ -1,0 +1,51 @@
+.bodyFont(@firstSize, @secondSize) {
+    font: @firstSize/@secondSize -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    .bodyFont(16px, 26px);
+}
+
+h1 {
+    .bodyFont(100px, 85px);
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+h2 {
+    .bodyFont(46px, 50px);
+}
+
+h3 {
+    .bodyFont(20px, 32px);
+}
+
+h4 {
+    .bodyFont(20px, 38px);
+}
+
+@media screen and (max-width: 960px) {
+    body {
+        .bodyFont(16px, 24px);
+    }
+
+    h1 {
+        .bodyFont(69px, 65px);
+    }
+
+    h2 {
+        .bodyFont(36px, 36px);
+    }
+
+    h3 {
+        .bodyFont(15px, 20px);
+    }
+    
+    h4 {
+        .bodyFont(16px, 25px);
+    }
+}
