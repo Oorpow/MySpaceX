@@ -1,0 +1,20 @@
+.banner {
+  width: 100%;
+  height: 950px;
+  background: url('http://localhost:1337/uploads/fh_feature_7ecb340a4c.webp') no-repeat;
+  background-position: right bottom;
+  background-size: cover;
+}
+.banner_title {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -15%);
+}
+.banner_title h1,
+.banner_title h3 {
+  color: #fff;
+  text-transform: uppercase;
+}
