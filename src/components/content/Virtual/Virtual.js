@@ -1,10 +1,17 @@
-import React, { useRef, useState } from 'react'
-import { useGetVirtualImgQuery } from '../../../store/api/virtualApi'
+import React, { useEffect, useRef, useState } from 'react'
+import {
+	useGetVirtualImgQuery,
+	useGetVirtualCarouselQuery,
+} from '../../../store/api/virtualApi'
 import { Carousel } from 'antd'
 import styles from './Virtual.module.less'
 
 const Virtual = () => {
 	const { data, isSuccess } = useGetVirtualImgQuery()
+
+	let res = useGetVirtualCarouselQuery()
+
+	const [carouselList, setCarouselList] = useState([])
 
 	const falconList = [
 		{
@@ -54,6 +61,28 @@ const Virtual = () => {
 		},
 	]
 
+	useEffect(() => {
+		const formatCarouselList = () => {
+			if (res.isSuccess) {
+				let copyCarousel = JSON.parse(JSON.stringify(res.data))
+
+				copyCarousel.forEach((item) => {
+					falconList.forEach((data) => {
+						item['smallTitle'] = data['smallTitle']
+						item['bigTitle'] = data['bigTitle']
+						if (data['intro'] != null) {
+							item['intro'] = []
+							item['intro'].push(...data['intro'])
+						}
+					})
+				})
+
+				setCarouselList(copyCarousel)
+			}
+		}
+		formatCarouselList()
+	}, [res])
+
 	const virtualContent = useRef()
 	const carouselRef = useRef()
 
@@ -67,7 +96,7 @@ const Virtual = () => {
 			document.documentElement.scrollTop || document.body.scrollTop
 		let distanceToTop =
 			virtualContent.current.offsetTop +
-			virtualContent.current.offsetTop / 2
+			virtualContent.current.offsetTop / 1.5
 		let isVisible = clientHeight + scrollY > distanceToTop
 
 		if (isVisible) {
@@ -111,7 +140,7 @@ const Virtual = () => {
 			<div ref={carouselRef}>
 				{/* 轮播 */}
 				<Carousel>
-					{falconList.map((item) => (
+					{carouselList.map((item) => (
 						<div
 							className={styles.carousel_item}
 							key={item.bigTitle}
@@ -158,7 +187,30 @@ const Virtual = () => {
 									))}
 							</div>
 							<div className={styles.carousel_item_img}>
-								<img src={item.url} />
+								{item.attributes.url == null && item.attributes.videoSrc != '' ? (
+									<video
+										autoPlay="autoplay"
+										loop
+										muted
+										preload="true"
+										width="100%"
+									>
+										<source
+											type="video/webm"
+											src={
+												'http://localhost:1337' +
+												item.attributes.videoSrc
+											}
+										/>
+									</video>
+								) : (
+									<img
+										src={
+											'http://localhost:1337' +
+											item.attributes.url
+										}
+									/>
+								)}
 							</div>
 						</div>
 					))}

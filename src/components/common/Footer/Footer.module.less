@@ -1,0 +1,97 @@
+.bodyFont(@firstSize, @secondSize) {
+    font: @firstSize/@secondSize -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.footer_main {
+    width: 100%;
+    background-color: #000;
+    padding-bottom: 100px;
+
+    &_top {
+        width: 60%;
+        margin: auto;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+
+        .bar {
+            width: 1px;
+            height: 140px;
+            background-color: #fff;
+            margin: 70px 0 30px 0;
+        }
+
+        .top_info{
+            color: #919191;
+            span {
+                color: #fff;
+            }
+        }
+
+        .btn_group {
+            display: flex;
+
+            &_item {
+                min-width: 130px;
+                position: relative;
+                margin: 10px 20px;
+                padding: 10px 15px;
+                border: 2px solid #fff;
+                text-transform: uppercase;
+                font-weight: 500;
+                cursor: pointer;
+
+                .mask {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    transform-origin: top center;
+                    transform: scale3d(1, 0, 1);
+                    transition: transform .6s;
+                    background-color: #fff;
+                }
+
+                .real {
+                    position: relative;
+                    color: #fff;
+                }
+
+                &:hover {
+                    .mask {
+                        transform: scale3d(1, 1, 1);
+                        transform-origin: bottom center;
+                    }
+                    .real {
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+
+    // 版权
+    &_bottom {
+        width: 70%;
+        margin: 50px auto;
+        .list {
+            display: flex;
+            justify-content: space-around;
+            li {
+                .copyright {
+                    color:#919191;
+                }
+                span {
+                    text-transform: uppercase;
+                    .bodyFont(12px, 24px);
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

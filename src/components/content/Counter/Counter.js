@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import styles from './Counter.module.less'
 import AnimatedNumbers from 'react-animated-numbers'
 
@@ -26,6 +26,7 @@ const Counter = () => {
 	const CountItem = () =>
 		countList.map((item) => (
 			<div className={styles.counter_item} key={item.id}>
+				{/* 倒数插件 */}
 				<AnimatedNumbers
 					animateToNumber={item.nums}
 					className={styles.counter_item_nums}
