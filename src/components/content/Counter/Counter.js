@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './Counter.module.less'
 import AnimatedNumbers from 'react-animated-numbers'
 
@@ -22,6 +22,11 @@ const Counter = () => {
 	]
 
 	const countContainerRef = useRef(null)
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+	window.addEventListener('resize', () => {
+		setWindowWidth(window.innerWidth)
+	})
 
 	const CountItem = () =>
 		countList.map((item) => (
@@ -30,7 +35,7 @@ const Counter = () => {
 				<AnimatedNumbers
 					animateToNumber={item.nums}
 					className={styles.counter_item_nums}
-					fontStyle={{fontSize: 80}}
+					fontStyle={windowWidth > 576 ? {fontSize: 80} : {fontSize: 40}}
 				/>
 				<span className={styles.counter_item_text}>{item.title}</span>
 			</div>

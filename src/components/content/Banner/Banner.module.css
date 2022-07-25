@@ -1,20 +1,29 @@
 .banner {
   width: 100%;
   height: 950px;
-  background: url('http://localhost:1337/uploads/fh_feature_7ecb340a4c.webp') no-repeat;
+  background: url('http://175.178.99.5:80/images/banners/fh_feature.webp') no-repeat;
   background-position: right bottom;
   background-size: cover;
 }
 .banner_title {
   width: 100%;
   text-align: center;
-  position: absolute;
-  left: 50%;
-  top: 8%;
-  transform: translate(-50%, -8%);
+  position: relative;
+  top: 40%;
 }
 .banner_title h1,
 .banner_title h3 {
   color: #fff;
   text-transform: uppercase;
+  font-weight: 500;
+}
+.banner_title h3 {
+  max-width: 60%;
+  margin: auto;
+}
+@media screen and (max-width: 576px) {
+  .banner {
+    height: 600px;
+    background-position: center center;
+  }
 }

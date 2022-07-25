@@ -5,7 +5,7 @@
     flex-direction: column;
 
     &_content {
-        padding: 0 5%;
+        // padding: 0 5%;
         display: flex;
         align-items: center;
         position: absolute;
@@ -13,6 +13,9 @@
 
         .virtual_intro {
             width: 40%;
+            position: relative;
+            left: 5%;
+
             h4 {
                 color: rgba(255, 255, 255, 0.7);
             }
@@ -24,6 +27,7 @@
                 height: 800px;
                 max-width: 100%;
                 max-height: 100%;
+                object-fit: cover;
             }
         }
     }
@@ -36,11 +40,10 @@
         // padding: 0 5%;
 
         &_intro {
-            width: 600px;
-            // flex: 1;
+            width: 80%;
             position: relative;
             left: 100px;
-            // width: 40%;
+            
             &_title {
                 h2, h4 {
                     text-transform: uppercase;
@@ -82,7 +85,37 @@
                 height: 800px;
                 max-width: 100%;
                 max-height: 100%;
+                object-fit: cover;
+                object-position: center;
             }
         }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .virtual {
+        &_content {
+            padding: 0;
+            .virtual_intro {
+                width: 55%;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 2;
+            }
+        }
+
+        .carousel_item {
+            flex-direction: column-reverse;
+
+            &_intro {
+                left: 0;
+            }
+
+        }
+    }
+
+    :global(.ant-carousel .slick-dots-bottom) {
+        bottom: 30% !important;
     }
 }

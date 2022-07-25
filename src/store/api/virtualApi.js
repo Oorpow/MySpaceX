@@ -9,14 +9,7 @@ const virtualApi = createApi({
 			getVirtualImg: build.query({
 				query() {
 					return {
-						url: 'virtuals',
-					}
-				},
-			}),
-			getVirtualCarousel: build.query({
-				query() {
-					return {
-						url: 'virtual-carousels',
+						url: 'virtual',
 					}
 				},
 			}),
@@ -24,5 +17,5 @@ const virtualApi = createApi({
 	},
 })
 
-export const { useGetVirtualImgQuery, useGetVirtualCarouselQuery } = virtualApi
+export const { useGetVirtualImgQuery } = virtualApi
 export default virtualApi

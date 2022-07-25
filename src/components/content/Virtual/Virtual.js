@@ -1,86 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {
 	useGetVirtualImgQuery,
-	useGetVirtualCarouselQuery,
 } from '../../../store/api/virtualApi'
 import { Carousel } from 'antd'
 import styles from './Virtual.module.less'
+import { useGetRealCarouselQuery } from '../../../store/api/realApi'
 
 const Virtual = () => {
+	// 虚拟图片
 	const { data, isSuccess } = useGetVirtualImgQuery()
-
-	let res = useGetVirtualCarouselQuery()
+	// 虚拟对应的真实轮播
+	let res = useGetRealCarouselQuery()
 
 	const [carouselList, setCarouselList] = useState([])
 
-	const falconList = [
-		{
-			smallTitle: 'falcon 9',
-			bigTitle: 'overview',
-			intro: [
-				{
-					name: 'height',
-					firstNum: '70 m',
-					lastNum: ' / 229.6 ft',
-				},
-				{
-					name: 'diameter',
-					firstNum: '3.7 m',
-					lastNum: ' / 12 ft',
-				},
-				{
-					name: 'mass',
-					firstNum: '549,054 kg',
-					lastNum: ' / 1,207,920 lb',
-				},
-				{
-					name: 'PAYLOAD TO LEO',
-					firstNum: '22,800 kg',
-					lastNum: ' / 50,265 lb',
-				},
-				{
-					name: 'PAYLOAD TO GTO',
-					firstNum: '22,800 kg',
-					lastNum: ' / 50,265 lb',
-				},
-				{
-					name: 'PAYLOAD TO MARS',
-					firstNum: '22,800 kg',
-					lastNum: ' / 50,265 lb',
-				},
-			],
-			url: 'http://localhost:1337/uploads/Website_F9_Fairings_Render_Desktop_7976da6f66.webp',
-		},
-		{
-			smallTitle: 'falcon 9',
-			bigTitle: 'overview',
-		},
-		{
-			smallTitle: 'falcon 9',
-			bigTitle: 'overview',
-		},
-	]
-
 	useEffect(() => {
-		const formatCarouselList = () => {
-			if (res.isSuccess) {
-				let copyCarousel = JSON.parse(JSON.stringify(res.data))
-
-				copyCarousel.forEach((item) => {
-					falconList.forEach((data) => {
-						item['smallTitle'] = data['smallTitle']
-						item['bigTitle'] = data['bigTitle']
-						if (data['intro'] != null) {
-							item['intro'] = []
-							item['intro'].push(...data['intro'])
-						}
-					})
-				})
-
-				setCarouselList(copyCarousel)
-			}
+		if (res.isSuccess) {
+			setCarouselList(res.data)
 		}
-		formatCarouselList()
 	}, [res])
 
 	const virtualContent = useRef()
@@ -94,9 +31,15 @@ const Virtual = () => {
 			document.body.clientHeight
 		let scrollY =
 			document.documentElement.scrollTop || document.body.scrollTop
-		let distanceToTop =
-			virtualContent.current.offsetTop +
-			virtualContent.current.offsetTop / 1.5
+
+		let distanceToTop = 0
+
+		if (virtualContent.current) {
+			distanceToTop =
+				virtualContent.current.offsetTop +
+				virtualContent.current.offsetTop / 1.5
+		}
+
 		let isVisible = clientHeight + scrollY > distanceToTop
 
 		if (isVisible) {
@@ -114,6 +57,7 @@ const Virtual = () => {
 
 	return (
 		<div className={styles.virtual}>
+			{/* 虚拟图片 */}
 			<div ref={virtualContent} className={styles.virtual_content}>
 				<div className={styles.virtual_intro}>
 					<h4>
@@ -131,19 +75,19 @@ const Virtual = () => {
 					<div className={styles.virtual_img}>
 						<img
 							src={
-								'http://localhost:1337' + data[0].attributes.url
+								process.env.REACT_APP_SERVER_URL + data[0].virtualImg
 							}
 						/>
 					</div>
 				)}
 			</div>
+			{/* 轮播 */}
 			<div ref={carouselRef}>
-				{/* 轮播 */}
 				<Carousel>
 					{carouselList.map((item) => (
 						<div
 							className={styles.carousel_item}
-							key={item.bigTitle}
+							key={item._id}
 						>
 							<div className={styles.carousel_item_intro}>
 								<div
@@ -187,7 +131,8 @@ const Virtual = () => {
 									))}
 							</div>
 							<div className={styles.carousel_item_img}>
-								{item.attributes.url == null && item.attributes.videoSrc != '' ? (
+								{item.img === '' &&
+								item.videoSrc !== '' ? (
 									<video
 										autoPlay="autoplay"
 										loop
@@ -198,16 +143,16 @@ const Virtual = () => {
 										<source
 											type="video/webm"
 											src={
-												'http://localhost:1337' +
-												item.attributes.videoSrc
+												process.env.REACT_APP_SERVER_URL +
+												item.videoSrc
 											}
 										/>
 									</video>
 								) : (
 									<img
 										src={
-											'http://localhost:1337' +
-											item.attributes.url
+											process.env.REACT_APP_SERVER_URL +
+											item.img
 										}
 									/>
 								)}

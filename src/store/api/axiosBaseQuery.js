@@ -1,7 +1,7 @@
 import request from './request'
 
 export const axiosQuery = (
-	{ baseUrl } = { baseUrl: 'http://localhost:1337/api/' }
+	{ baseUrl } = { baseUrl: process.env.REACT_APP_SERVER_URL + 'api/' }
 ) => {
 	return ({ url, method, data, params }) => {
 		return request({

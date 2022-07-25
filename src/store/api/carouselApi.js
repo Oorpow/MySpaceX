@@ -9,7 +9,7 @@ const carouselApi = createApi({
 			getCarousel: build.query({
 				query() {
 					return {
-						url: 'carousels',
+						url: 'carousel',
 					}
 				},
 			}),

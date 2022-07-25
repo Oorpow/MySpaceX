@@ -5,7 +5,6 @@
   flex-direction: column;
 }
 .virtual_content {
-  padding: 0 5%;
   display: flex;
   align-items: center;
   position: absolute;
@@ -13,6 +12,8 @@
 }
 .virtual_content .virtual_intro {
   width: 40%;
+  position: relative;
+  left: 5%;
 }
 .virtual_content .virtual_intro h4 {
   color: rgba(255, 255, 255, 0.7);
@@ -24,6 +25,7 @@
   height: 800px;
   max-width: 100%;
   max-height: 100%;
+  object-fit: cover;
 }
 .virtual .carousel_item {
   display: flex!important;
@@ -31,7 +33,7 @@
   color: #fff;
 }
 .virtual .carousel_item_intro {
-  width: 600px;
+  width: 80%;
   position: relative;
   left: 100px;
 }
@@ -72,4 +74,27 @@
   height: 800px;
   max-width: 100%;
   max-height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@media screen and (max-width: 992px) {
+  .virtual_content {
+    padding: 0;
+  }
+  .virtual_content .virtual_intro {
+    width: 55%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .virtual .carousel_item {
+    flex-direction: column-reverse;
+  }
+  .virtual .carousel_item_intro {
+    left: 0;
+  }
+  :global(.ant-carousel .slick-dots-bottom) {
+    bottom: 30% !important;
+  }
 }

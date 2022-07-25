@@ -22,7 +22,7 @@
             align-items: center;
             text-align: center;
             color: #fff;
-
+            
             &_nums {
                 .countFont(120px, 120px);
             }
@@ -36,3 +36,16 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .counter {
+        &_content {
+            .counter_item {
+                &_text {
+                    .countFont(15px, 20px);
+                }
+            }
+        }
+    }
+}
+

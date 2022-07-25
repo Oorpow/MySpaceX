@@ -9,11 +9,9 @@
 .footer_main {
     width: 100%;
     background-color: #000;
-    padding-bottom: 100px;
+    padding-bottom: 1px;
 
     &_top {
-        width: 60%;
-        margin: auto;
         display: flex;
         flex-flow: column wrap;
         align-items: center;
@@ -39,7 +37,7 @@
                 min-width: 130px;
                 position: relative;
                 margin: 10px 20px;
-                padding: 10px 15px;
+                padding: 10px 10px;
                 border: 2px solid #fff;
                 text-transform: uppercase;
                 font-weight: 500;
@@ -77,21 +75,73 @@
 
     // 版权
     &_bottom {
-        width: 70%;
+        width: 50%;
         margin: 50px auto;
+
         .list {
             display: flex;
             justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .copyright {
+                color:#919191;
+            }
+
             li {
-                .copyright {
-                    color:#919191;
-                }
                 span {
                     text-transform: uppercase;
                     .bodyFont(12px, 24px);
                     font-weight: 500;
+                    cursor: pointer;
+                    transition: color .4s;
+
+                    &:hover {
+                        color: rgba(255, 255, 255, 0.8);
+                    }
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .footer_main {
+        &_top {
+            .top_info{
+                max-width: 80%;
+                text-align: center;
+            }
+            .btn_group {
+                width: 90%;
+                margin: auto;
+                flex-wrap: wrap;
+                justify-content: center;
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer_main {
+        &_bottom {
+            width: 90%;
+
+            .list {
+                .copyright {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .footer_main {
+        &_bottom {
+            width: 80%;
         }
     }
 }

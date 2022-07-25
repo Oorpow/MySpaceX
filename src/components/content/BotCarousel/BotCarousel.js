@@ -6,13 +6,14 @@ import { useGetCarouselQuery } from '../../../store/api/carouselApi'
 const BotCarousel = () => {
 	const { data, isSuccess } = useGetCarouselQuery()
 
+
 	return (
-		<div>
+		<div className={styles.carousel_main}>
 			<Carousel effect="fade" autoplay dotPosition="left">
 				{isSuccess &&
 					data.map((item) => (
-						<div key={item.id}>
-							<img src={'http://localhost:1337' + item.attributes.url} />
+						<div key={item._id} className={styles.carousel_item}>
+							<img src={process.env.REACT_APP_SERVER_URL + item.img} />
 						</div>
 					))}
 			</Carousel>

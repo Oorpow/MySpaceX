@@ -9,7 +9,7 @@ const bannerApi = createApi({
 			getBannerImg: build.query({
 				query() {
 					return {
-						url: 'banners',
+						url: 'banner',
 					}
 				},
 			}),
